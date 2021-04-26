@@ -1,0 +1,101 @@
+﻿@model EventFully.EMS.Models.AgendaViewModel
+
+    <div class="modal fade" id="AgendaItemModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add/Edit Agenda Item</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <form asp-action="SaveAgendaItem" asp-controller="Event" role="form" data-ajax-method="POST" data-ajax-success="SaveAgendaItem(data)" data-ajax-failure="SaveAgendaItem(data)" data-ajax="true" id="EditAgendaItemForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="AgendaItem.Title">Title <em class="text-danger">*</em></label>
+                            <input asp-for="AgendaItem.Title" data-rule-minlength="2" data-rule-maxlength="255" class="form-control required" placeholder="Title" />
+                            <span asp-validation-for="AgendaItem.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="AgendaItem.StartDate">Date</label>
+                            <input type="text" readonly class="form-control-plaintext" asp-for="AgendaItem.StartDate">
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="AgendaItem.StartTime">Start Time <em class="text-danger">*</em></label>
+                                <input asp-for="AgendaItem.StartTime" type="text" class="form-control required" />
+                                <span asp-validation-for="AgendaItem.StartTime" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+                                <label for="AgendaItem.EndTime">End Time <em class="text-danger">*</em></label>
+                                <input asp-for="AgendaItem.EndTime" type="text" class="form-control required" />
+                                <span asp-validation-for="AgendaItem.EndTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="AgendaItem.Location">Location <em class="text-danger">*</em></label>
+                            <input asp-for="AgendaItem.Location" data-rule-minlength="2" data-rule-maxlength="255" class="form-control required" placeholder="Enter location" />
+                            <span asp-validation-for="AgendaItem.Location" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-normal">Tracks <small>(Select one or multiple)</small></label>
+                            <select class="selectpicker form-control" asp-for="SelectedTracks" multiple>
+                                @foreach (var track in Model.Tracks)
+                                {
+                                    <option value="@track.Id" selected="@track.Selected" data-content="<i class='fa fa-circle' style='color: @track.HexColor'></i>  @track.TrackName">@track.TrackName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group" id="add-track-container" style="display:none;">
+                            <label class="font-normal">Create Track</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <select id="colorselector" class="form-control required">
+                                        <option value="#FFFFFF" data-color="#FFFFFF" selected="selected">white</option>
+                                        <option value="#dc3545" data-color="#dc3545">Red</option>
+                                        <option value="#007bff" data-color="#007bff">MediumBlue</option>
+                                        <option value="#1ab394" data-color="#1ab394">MediumGreen</option>
+                                        <option value="#FF8C00" data-color="#FF8C00">DarkOrange</option>
+                                        <option value="#C71585" data-color="#C71585">MediumViolet</option>
+                                        <option value="#676a6c" data-color="#676a6c">DarkGrey</option>
+                                        <option value="#ffea55" data-color="#ffea55">Yellow</option>
+                                        <option value="#000000" data-color="#000000">Black</option>
+                                    </select>
+                                </div>
+                                <input type="text" asp-for="AddTrackName" class="form-control required" data-rule-minlength="2" data-rule-maxlength="255" aria-label="Track Name">
+                                <div class="input-group-append">
+                                    <a href="#" class="btn btn-success" id="AddTrack">Save</a>
+                                </div>
+                                <div class="input-group-append">
+                                    <a href="#" class="btn btn-danger" id="CancelTrack">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="add-track-link-container">
+                            <a href="#" id="add-track-link"><i class="fa fa-plus-circle"></i> Create Track</a>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-normal">Speakers <small>(Select one or multiple)</small></label>
+                            <select data-placeholder="Choose Speakers" asp-items="@ViewBag.SpeakerList" asp-for="SelectedSpeakers" class="chosen-select" multiple tabindex="4">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="AgendaItem.Description">Description <em class="text-danger">*</em></label>
+                            <textarea asp-for="AgendaItem.Description" data-rule-minlength="2" data-rule-maxlength="8000" class="form-control required" rows="10" placeholder="Enter Description"></textarea>
+                            <span asp-validation-for="AgendaItem.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Agenda Item</button>
+                        <input type="hidden" asp-for="AgendaItem.Id" />
+                        <input type="hidden" asp-for="AgendaItem.EndDate" />
+                        <input type="hidden" asp-for="AgendaItem.EventId" />
+                        <input type="hidden" asp-for="AgendaItem.CreatedByUserId" />
+                        <input type="hidden" asp-for="AgendaItem.CreatedDate" />
+                        <input type="hidden" asp-for="AgendaItem.ModifiedByUserId" />
+                        <input type="hidden" asp-for="AgendaItem.ModifiedDate" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

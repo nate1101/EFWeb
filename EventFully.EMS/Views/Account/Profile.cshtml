@@ -1,0 +1,98 @@
+﻿@model EventFully.Models.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Profile</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item active"><a class="nav-link" id="profile" href="#">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" id="change-password" href="@Url.Action("ChangePassword","Account")">Password</a></li>
+                <li class="nav-item"><a class="nav-link" id="personal-data" href="@Url.Action("PersonalData","Account")">Personal Data</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-4">
+            <h1 class="mt-0 font-bold">Profile</h1>
+            <form role="form" asp-action="Profile" asp-controller="Account" data-ajax-method="POST" data-ajax="true" data-ajax-success="SaveProfile(data)" data-ajax-failure="SaveProfile(data)" id="profile-form">
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input class="form-control" disabled value="@Model.UserName" />
+                    <input asp-for="UserName" class="form-control" type="hidden"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    @if (!Model.IsEmailConfirmed)
+                    {
+                        <div class="input-group">
+                            <input asp-for="Email" class="form-control" required="" />
+                            <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <input asp-for="Email" class="form-control" required="" />
+                        <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                    }
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName" class="form-control" required="" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <input asp-for="LastName" class="form-control" required="" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <button id="update-profile-button" type="submit" class="btn btn-primary btn-lg pull-right">Update Profile</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+        <link href="~/lib/slim/slim.min.css" rel="stylesheet" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+        <link href="~/lib/jasny-bootstrap/dist/css/jasny-bootstrap.css" rel="stylesheet" />
+    </environment>
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jQuery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/dataTables/datatables.min.js"></script>
+    <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/slim/slim.kickstart.js"></script>
+    <script src="~/lib/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
+
+    <script type="text/javascript">
+        var aTable;
+        $(document).ready(function () {
+
+        });
+
+        function SaveProfile(data) {
+            if (data.success == true) {
+                swal("Success", "Profile saved successfully!", "success");
+            }
+            else {
+                swal("Error", "An unexpected error has occurred. Please try again.", "error");
+            }
+        }
+
+    </script>
+}

@@ -1,0 +1,51 @@
+﻿@model EventFully.EMS.Models.TrackViewModel
+
+    <div class="modal fade" id="TrackModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add/Edit Track</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <form asp-action="SaveTrack" asp-controller="Event" role="form" data-ajax-method="POST" data-ajax-success="SaveTrack(data)" data-ajax-failure="SaveTrack(data)" data-ajax="true" id="EditTrackForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Track.TrackName">Track Name</label>
+                            <input asp-for="Track.TrackName" data-rule-minlength="2" data-rule-maxlength="255" class="form-control required" placeholder="Track Name" />
+                            <span asp-validation-for="Track.TrackName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Track.HexColor">Color Identifier</label>
+                            <select asp-for="Track.HexColor" class="required">
+                                <option value="#FFFFFF" data-color="#FFFFFF" selected="selected">white</option>
+                                <option value="#dc3545" data-color="#dc3545">Red</option>
+                                <option value="#007bff" data-color="#007bff">MediumBlue</option>
+                                <option value="#1ab394" data-color="#1ab394">MediumGreen</option>
+                                <option value="#FF8C00" data-color="#FF8C00">DarkOrange</option>
+                                <option value="#C71585" data-color="#C71585">MediumViolet</option>
+                                <option value="#676a6c" data-color="#676a6c">DarkGrey</option>
+                                <option value="#ffea55" data-color="#ffea55">Yellow</option>
+                                <option value="#000000" data-color="#000000">Black</option>
+                            </select>
+                            <span asp-validation-for="Track.HexColor" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Track.Description">Description</label>
+                            <textarea asp-for="Track.Description" data-rule-minlength="2" data-rule-maxlength="8000" class="form-control" rows="10" placeholder="Enter Description"></textarea>
+                            <span asp-validation-for="Track.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Track</button>
+                        <input type="hidden" asp-for="Track.Id" />
+                        <input type="hidden" asp-for="Track.EventId" />
+                        <input type="hidden" asp-for="Track.CreatedByUserId" />
+                        <input type="hidden" asp-for="Track.CreatedDate" />
+                        <input type="hidden" asp-for="Track.ModifiedByUserId" />
+                        <input type="hidden" asp-for="Track.ModifiedDate" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

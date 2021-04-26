@@ -1,0 +1,127 @@
+﻿@model EventFully.EMS.Models.SponsorViewModel
+
+    <div class="modal fade" id="SponsorModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add/Edit Sponsor</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <form asp-action="SaveSponsor" asp-controller="Event" role="form" data-ajax-method="POST" data-ajax-success="SaveSponsor(data)" data-ajax-failure="SaveSponsor(data)" data-ajax="true" id="EditSponsorForm">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="font-normal">Profile Pic</label>
+                                            <div class="slim" id="slimProfile"
+                                                 data-ratio="1:1"
+                                                 data-size="200,200"
+                                                 data-max-file-size="2">
+                                                <img src="@Model.Sponsor.ProfilePic" alt="" />
+                                                <input type="file" name="slimProfile[]" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="font-normal">Banner</label>
+                                            <div class="slim" id="slimBanner"
+                                                 data-size="640,100"
+                                                 data-force-size="640,100"
+                                                 data-max-file-size="2">
+                                                <img src="@Model.Sponsor.BannerImage" alt="" />
+                                                <input type="file" name="slimBanner[]" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-normal">Banner Url<small>(Must start with http:// or https)</small></label>
+                                            <input asp-for="Sponsor.BannerImageUrl" data-rule-minlength="2" data-rule-maxlength="1000" data-rule-url="true" class="form-control" data-msg-required="Please enter a URL" />
+                                            <span asp-validation-for="Sponsor.BannerImageUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label class="font-normal">Sponsor Name</label>
+                                    <input asp-for="Sponsor.SponsorName" data-rule-minlength="2" data-rule-maxlength="255" class="form-control required" data-msg-required="Please enter a Sponsor Name" />
+                                    <span asp-validation-for="Sponsor.SponsorName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Address</label>
+                                    <input asp-for="Sponsor.Address1" data-rule-minlength="2" data-rule-maxlength="100" class="form-control required" data-msg-required="Please enter a Address" />
+                                    <span asp-validation-for="Sponsor.Address1" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Address2</label>
+                                    <input asp-for="Sponsor.Address2" data-rule-minlength="2" data-rule-maxlength="100" class="form-control" data-msg-required="Please enter a Address2" />
+                                    <span asp-validation-for="Sponsor.Address2" class="text-danger"></span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="Sponsor.City">City</label>
+                                        <input type="text" asp-for="Sponsor.City" data-rule-minlength="2" data-rule-maxlength="50" class="form-control required" placeholder="City">
+                                        <span asp-validation-for="Sponsor.City" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Sponsor.State">State</label>
+                                        <select asp-for="Sponsor.State" asp-items="@ViewBag.StateList" class="form-control required" data-msg-required="Please select a State">
+                                            <option value="">Please Select a State</option>
+                                        </select>
+                                        <span asp-validation-for="Sponsor.State" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Event.PostalCode">Zip Code</label>
+                                        <input type="text" asp-for="Sponsor.PostalCode" data-rule-minlength="5" data-rule-maxlength="5" class="form-control required" placeholder="Zip">
+                                        <span asp-validation-for="Sponsor.PostalCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label class="font-normal">Website <small>(Must start with http:// or https)</small></label>
+                                    <input asp-for="Sponsor.Website" data-rule-minlength="2" data-rule-maxlength="1000" data-rule-url="true" class="form-control" data-msg-required="Please enter a Website" />
+                                    <span asp-validation-for="Sponsor.Website" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Contact Name</label>
+                                    <input asp-for="Sponsor.ContactName" data-rule-minlength="2" data-rule-maxlength="100" class="form-control required" data-msg-required="Please enter a Contact Name" />
+                                    <span asp-validation-for="Sponsor.ContactName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Phone</label>
+                                    <input asp-for="Sponsor.ContactPhone" data-rule-minlength="14" data-rule-maxlength="14" class="form-control required" data-msg-required="Please enter a Phone" />
+                                    <span asp-validation-for="Sponsor.ContactPhone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Email</label>
+                                    <input asp-for="Sponsor.ContactEmail" data-rule-minlength="2" data-rule-maxlength="100" data-rule-email="true" class="form-control required" data-msg-required="Please enter an Email Address" />
+                                    <span asp-validation-for="Sponsor.ContactEmail" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">About</label>
+                                    <textarea asp-for="Sponsor.Description" data-rule-minlength="3" data-rule-maxlength="8000" rows="10" class="form-control" data-msg-required="Please enter a Description"></textarea>
+                                    <span asp-validation-for="Sponsor.Description" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input asp-for="Sponsor.EventId" type="hidden" />
+                        <input asp-for="Sponsor.BannerImage" type="hidden" />
+                        <input asp-for="Sponsor.ProfilePic" type="hidden" />
+                        <input asp-for="Sponsor.Id" type="hidden" />
+                        <input asp-for="Sponsor.CreatedDate" type="hidden" />
+                        <input asp-for="Sponsor.CreatedByUserId" type="hidden" />
+                        <input asp-for="Sponsor.ModifiedDate" type="hidden" />
+                        <input asp-for="Sponsor.ModifiedByUserId" type="hidden" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Sponsor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

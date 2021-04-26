@@ -1,0 +1,384 @@
+﻿@model EventFully.EMS.Models.EventViewModel
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>@Model.Event.EventName</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Event",new { eventId = @Model.Event.Id })">Event Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Edit Event</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <form role="form" asp-action="EditEvent" asp-controller="Event" data-ajax-method="POST" data-ajax="true" data-ajax-success="EditEvent(data)" data-ajax-failure="EditEvent(data)" id="EventForm">
+                <div class="ibox  float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Edit Event</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Banner</label>
+                                    <input type="file" id="slimBanner" name="slimBanner[]" />
+                                    <small class="form-text text-muted">Used for your mobile headers</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Badge/Thumbnail</label>
+                                    <div class="slim-badge-preview">
+                                        <input type="file" id="slimBadge" name="slimBadge[]" />
+                                    </div>
+                                    <small class="form-text text-muted">Used for your mobile app and event search</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Event.EventName">Event Name</label>
+                                    <input asp-for="Event.EventName" data-rule-minlength="2" data-rule-maxlength="255" class="form-control required" placeholder="Event Name">
+                                    <span asp-validation-for="Event.EventName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group" id="eventDates">
+                                    <label class="font-normal">Dates</label>
+                                    <div class="input-daterange input-group" id="datepicker">
+                                        <input type="text" class="form-control-sm form-control required" asp-for="Event.StartDate" />
+                                        <span class="input-group-addon">to</span>
+                                        <input type="text" class="form-control-sm form-control required" asp-for="Event.EndDate" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Event.Description">Description</label>
+                                    <textarea asp-for="Event.Description" data-rule-minlength="2" data-rule-maxlength="8000" class="form-control required" rows="10" placeholder="Event Description"></textarea>
+                                    <span asp-validation-for="Event.Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Event.VenueName">Venue</label>
+                                    <input asp-for="Event.VenueName" data-rule-minlength="2" data-rule-maxlength="100" class="form-control" placeholder="Venue">
+                                    <span asp-validation-for="Event.VenueName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Enter Address</label>
+                                    <select asp-for="Event.AddressLabelValue" asp-items="@ViewBag.AddressList" class="form-control required"></select>
+                                    <span asp-validation-for="Event.AddressLabelValue" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div id="map" style="display: block; width:100%; height:300px; background:grey"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Event.Street">Address</label>
+                                    <input asp-for="Event.Street" readonly data-rule-minlength="2" data-rule-maxlength="100" class="form-control required" placeholder="Address">
+                                    <span asp-validation-for="Event.Street" class="text-danger"></span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="Event.City">City</label>
+                                        <input type="text" asp-for="Event.City" readonly data-rule-minlength="2" data-rule-maxlength="50" class="form-control required" placeholder="City">
+                                        <span asp-validation-for="Event.City" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Event.State">State</label>
+                                        @*<select asp-for="Event.State" asp-items="@ViewBag.StateList" readonly class="form-control required" data-msg-required="Please select a State">
+                                            <option value="">Please Select a State</option>
+                                        </select>*@
+                                        <input type="text" asp-for="Event.State" readonly data-rule-minlength="2" data-rule-maxlength="2" class="form-control required" placeholder="ST">
+                                        <span asp-validation-for="Event.State" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Event.PostalCode">Zip Code</label>
+                                        <input type="text" asp-for="Event.PostalCode" readonly data-rule-minlength="5" data-rule-maxlength="5" class="form-control required" placeholder="Zip">
+                                        <span asp-validation-for="Event.PostalCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Event.TimeZone">Time Zone</label>
+                                    <input asp-for="Event.TimeZone" data-rule-minlength="2" readonly data-rule-maxlength="100" class="form-control required" placeholder="Time Zone">
+                                    <span asp-validation-for="Event.TimeZone" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer text-right">
+                        <a href="/event/@Model.Event.Id" class="btn btn-danger btn-lg"><strong>Back to Dashboard</strong></a>
+                        <button class="btn btn-primary btn-lg" type="submit"><strong>Save</strong></button>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="Event.Id" />
+                <input asp-for="Event.Published" type="hidden" />
+                <input asp-for="Event.PublishedByUserId" type="hidden" />
+                <input asp-for="Event.PublishedDate" type="hidden" />
+                <input asp-for="Event.CreatedDate" type="hidden" />
+                <input asp-for="Event.CreatedByUserId" type="hidden" />
+                <input asp-for="Event.ModifiedDate" type="hidden" />
+                <input asp-for="Event.ModifiedByUserId" type="hidden" />
+                <input asp-for="Event.TimeZoneOffsetSeconds" type="hidden" />
+                <input asp-for="Event.Longitude" type="hidden" />
+                <input asp-for="Event.Latitude" type="hidden" />
+                <input asp-for="Event.AddressLabel" type="hidden" />
+            </form>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+        <link href="~/lib/slim/slim.min.css" rel="stylesheet" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
+        <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1549984893" />
+        <link href="~/lib/select2/dist/css/select2.css" rel="stylesheet" />
+    </environment>
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jQuery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/dataTables/datatables.min.js"></script>
+    <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/slim/slim.kickstart.js"></script>
+    <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script src="~/lib/select2/dist/js/select2.min.js"></script>
+
+    <script type="text/javascript" charset="UTF-8">
+        var aTable;
+        $(document).ready(function () {
+            var cropperBanner = new Slim(document.getElementById('slimBanner'),
+                {
+                    ratio: '16:9',
+                    forceSize: {
+                        width: 640,
+                        height: 360,
+                    },
+                    minSize: {
+                        width: 640,
+                        height: 360,
+                    },
+                    forceType: "jpg",
+                    label: "Click here to upload image",
+                    statusImageTooSmall: "Image is too small, minimum size is: $0 pixels."
+                });
+
+            @if (!String.IsNullOrEmpty(Model.Event.EventBanner))
+            {
+                <text>cropperBanner.load('@Model.Event.EventBanner');</text>
+            }
+
+            var cropperBadge = new Slim(document.getElementById('slimBadge'),
+                {
+                    ratio: '1:1',
+                    forceSize: {
+                        width: 200,
+                        height: 200,
+                    },
+                    minSize: {
+                        width: 200,
+                        height: 200,
+                    },
+                    forceType: "jpg",
+                    label: "Click here to upload image",
+                    statusImageTooSmall: "Image is too small, minimum size is: $0 pixels."
+                });
+
+            console.log('@Model.Event.EventThumb');
+            @if (!String.IsNullOrEmpty(Model.Event.EventThumb))
+            {
+                <text>cropperBadge.load('@Model.Event.EventThumb');</text>
+            }
+
+            $('#eventDates .input-daterange').datepicker({
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });
+        });
+
+        function EditEvent(data) {
+            if (data.success == true) {
+                swal("Event saved successfully!", {
+                    buttons: {
+                        stayHere: {
+                            text: "Stay Here",
+                            value: "StayHere"
+                        },
+                        goToList: {
+                            text: "Back to Event Home",
+                            value: "BackToHome"
+                        },
+                    },
+                    icon: "success"
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "BackToHome":
+                                window.location.href = data.returnToHomeUrl;
+                                break;
+                            case "StayHere":
+                                window.location.href = data.reloadUrl;
+                                break;
+                        }
+                    });
+            }
+            else {
+                swal("Error", "An unexpected error has occurred. Please try again.", "error");
+            }
+        }
+
+        /**
+         * Boilerplate map initialization code starts below:
+         */
+        // set up containers for the map  + panel
+        var mapContainer = document.getElementById('map')
+          //suggestionsContainer = document.getElementById('panel');
+
+        //Step 1: initialize communication with the platform
+        var APPLICATION_ID = 'T5U8gJ2nwamnAoEjgzLS',
+            APPLICATION_CODE = 'sKqYou1cf3mpCEjxHELjLw';
+
+        var platform = new H.service.Platform({
+          app_id: APPLICATION_ID,
+          app_code: APPLICATION_CODE,
+          useCIT: false,
+          useHTTPS: true
+        });
+        var defaultLayers = platform.createDefaultLayers();
+        var geocoder = platform.getGeocodingService();
+        var group = new H.map.Group();
+
+        group.addEventListener('tap', function (evt) {
+          map.setCenter(evt.target.getPosition());
+          openBubble(
+             evt.target.getPosition(), evt.target.getData());
+        }, false);
+
+
+        //Step 2: initialize a map - this map is centered over Europe
+        var map = new H.Map(mapContainer,
+          defaultLayers.normal.map,{
+              center: { lat: 39.78493, lng: -98.56054},
+          zoom: 4
+        });
+
+         map.addObject(group);
+
+        //Step 3: make the map interactive
+        // MapEvents enables the event system
+        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+        // Create the default UI components
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        // Hold a reference to any infobubble opened
+        var bubble;
+
+        /**
+         * Function to Open/Close an infobubble on the map.
+         * param  {H.geo.Point} position     The location on the map.
+         * param  {String} text              The contents of the infobubble.
+         */
+        function openBubble(position, text){
+         if(!bubble){
+            bubble =  new H.ui.InfoBubble(
+              position,
+              // The FO property holds the province name.
+              {content: '<small>' + text+ '</small>'});
+            ui.addBubble(bubble);
+          } else {
+            bubble.setPosition(position);
+            bubble.setContent('<small>' + text+ '</small>');
+            bubble.open();
+          }
+        }
+
+        var options = {
+            minimumInputLength: 3,
+            placeholder: "Begin typing your venue's address...",
+            ajax: {
+                url: 'https://autocomplete.geocoder.cit.api.here.com/6.2/suggest.json',
+                delay: 250,
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        query: params.term,
+                        app_id: APPLICATION_ID,
+                        app_code: APPLICATION_CODE,
+                        beginHighlight: '<b>',
+                        endHighlight: '</b>',
+                        country: 'USA'
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data.suggestions, function (obj) {
+                            return { id: obj.locationId, text: obj.label.split(', ').reverse().join(', ') };
+                        })
+                    };
+                }
+            },
+            escapeMarkup: function (markup) { return markup; }
+        };
+
+        $('#Event_AddressLabelValue').select2(options).on('select2:select', function (e) {
+            group.removeAll();
+            if (bubble) {
+                bubble.close();
+            }
+            $.getJSON('https://geocoder.cit.api.here.com/6.2/geocode.json', {
+                gen: 9,
+                app_id: APPLICATION_ID,
+                app_code: APPLICATION_CODE,
+                locationId: e.params.data.id,
+                locationattributes:'adminInfo,timeZone'
+            }).done(function (data) {
+                var locn = data.Response.View[0].Result[0].Location;
+
+                CreateMarker(locn.DisplayPosition.Longitude, locn.DisplayPosition.Latitude, locn.Address.Label);
+
+                $("#Event_Street").val(locn.Address.HouseNumber + " " + locn.Address.Street);
+                $("#Event_City").val(locn.Address.City);
+                $("#Event_State").val(locn.Address.State);
+                $("#Event_PostalCode").val(locn.Address.PostalCode);
+                $("#Event_TimeZone").val(locn.AdminInfo.TimeZone.id);
+                $("#Event_TimeZoneOffsetSeconds").val(locn.AdminInfo.TimeZone.offset);
+                $("#Event_Longitude").val(locn.DisplayPosition.Longitude);
+                $("#Event_Latitude").val(locn.DisplayPosition.Latitude);
+                $("#Event_AddressLabel").val(locn.Address.Label);
+            });
+        });
+
+        function CreateMarker(long, lat, label) {
+            var marker = new H.map.Marker({
+                lat: lat,
+                lng: long
+            });
+            marker.setData(label);
+            group.addObject(marker);
+
+            map.setViewBounds(group.getBounds());
+            if (group.getObjects().length < 2) {
+                map.setZoom(15);
+            }
+        }
+
+        @if(Model.Event.Longitude != 0)
+        {
+            <text>CreateMarker(@Model.Event.Longitude, @Model.Event.Latitude, "@Model.Event.AddressLabel");</text>
+        }
+    </script>
+}

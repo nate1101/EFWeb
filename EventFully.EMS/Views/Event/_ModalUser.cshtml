@@ -1,0 +1,34 @@
+﻿@model EventFully.EMS.Models.UserEventInvitationViewModel
+
+    <div class="modal fade" id="UserModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add User to Event</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <form asp-action="SaveUser" asp-controller="Event" role="form" data-ajax-method="POST" data-ajax-success="SaveUser(data)" data-ajax-failure="SaveUser(data)" data-ajax="true" id="EditUserForm">
+                    <div class="modal-body">
+                        <p>Enter the email address of the user you would like to add as an Event Administrator. An invitation will be emailed to this person and, upon acceptance, will give them access to your event.</p>
+                        <div class="form-group">
+                            <input asp-for="UserEventInvitation.EmailAddress" data-rule-minlength="2" data-rule-maxlength="100" required="" data-rule-email="true" class="form-control required" placeholder="Email Address" />
+                            <span asp-validation-for="UserEventInvitation.EmailAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send Invitation</button>
+                        <input type="hidden" asp-for="UserEventInvitation.CreatedByUserId" />
+                        <input type="hidden" asp-for="UserEventInvitation.CreatedDate" />
+                        <input type="hidden" asp-for="UserEventInvitation.EventId" />
+                        <input type="hidden" asp-for="UserEventInvitation.Id" />
+                        <input type="hidden" asp-for="UserEventInvitation.ModifiedByUserId" />
+                        <input type="hidden" asp-for="UserEventInvitation.ModifiedDate" />
+                        <input type="hidden" asp-for="UserEventInvitation.RoleId" />
+                        <input type="hidden" asp-for="UserEventInvitation.Token" />
+                        <input type="hidden" asp-for="UserEventInvitation.TokenExpiration" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

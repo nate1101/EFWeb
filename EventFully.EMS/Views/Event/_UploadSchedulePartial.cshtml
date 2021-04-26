@@ -1,0 +1,79 @@
+﻿@model EventFully.EMS.Models.ImportScheduleViewModel
+
+<table class="table table-bordered" style="font-size: .85em">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Session Title</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Tracks</th>
+            <th>Speakers</th>
+            <th>Error</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ImportedScheduleItems != null)
+        {
+            @for (var i = 0; i < Model.ImportedScheduleItems.Count(); i++)
+            {
+        <tr>
+            <td>
+                @if (!@Model.ImportedScheduleItems[i].SessionDate.HasValue)
+                {
+                    <label>@Model.ImportedScheduleItems[i].SessionDate</label>
+                }
+                else
+                {
+                    <label>@Model.ImportedScheduleItems[i].SessionDate.Value.ToShortDateString()</label>
+                }
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionDate" data-format="M/D/YYYY" class="form-control required date" required="" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionDate" class="text-danger" />
+            </td>
+            <td>
+                <label>@Model.ImportedScheduleItems[i].SessionStartTime</label>
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionStartTime" class="form-control required" required="" style="width:90px;" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionStartTime" class="text-danger" />
+            </td>
+            <td>
+                <label>@Model.ImportedScheduleItems[i].SessionEndTime</label>
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionEndTime" class="form-control required" required="" style="width:90px;" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionEndTime" class="text-danger" />
+            </td>
+            <td>
+                <label>@Model.ImportedScheduleItems[i].SessionTitle</label>
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionTitle" class="form-control required" required="" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionTitle" class="text-danger" />
+            </td>
+            <td>
+                <label>@Model.ImportedScheduleItems[i].SessionDescription</label>
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionDescription" class="form-control" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionDescription" class="text-danger" />
+            </td>
+            <td>
+                <label>@Model.ImportedScheduleItems[i].SessionLocation</label>
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionLocation" class="form-control" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionLocation" class="text-danger" />
+            </td>
+            <td>
+                <label>@Model.ImportedScheduleItems[i].SessionTrack</label>
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionTrack" class="form-control" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionTrack" class="text-danger" />
+            </td>
+            <td>
+                <label>@Model.ImportedScheduleItems[i].SessionSpeaker</label>
+                <input type="hidden" asp-for="@Model.ImportedScheduleItems[i].SessionSpeaker" class="form-control" />
+                <span asp-validation-for="@Model.ImportedScheduleItems[i].SessionSpeaker" class="text-danger" />
+            </td>
+            <td>
+                <ul class="text-danger">
+                    @Html.Raw(@Model.ImportedScheduleItems[i].ErrorMessage)
+                </ul>
+            </td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>

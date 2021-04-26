@@ -1,0 +1,112 @@
+﻿@model EventFully.EMS.Models.ImportScheduleViewModel
+@{
+    ViewData["Title"] = "Upload Schedule";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>@Model.Event.EventName: Review and Upload Schedule</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Event",new { eventId = @Model.Event.Id })">Event Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Review and Upload Schedule</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12" id="upload-container">
+            <form role="form" asp-action="UploadSchedule" asp-controller="Event" data-ajax-method="POST" data-ajax="true" data-ajax-success="UploadSchedule(data)" data-ajax-failure="UploadSchedule(data)" id="UploadScheduleForm">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Review and Upload</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="sk-spinner sk-spinner-wave">
+                            <div class="sk-rect1"></div>
+                            <div class="sk-rect2"></div>
+                            <div class="sk-rect3"></div>
+                            <div class="sk-rect4"></div>
+                            <div class="sk-rect5"></div>
+                        </div>
+                        <h5>Review the the agenda items below for accuracy and then click the Upload Schedule button to complete the upload.</h5>
+                        <hr />
+                        <div id="imported-schedule">
+                            @await Html.PartialAsync("_UploadSchedulePartial")
+                        </div>
+                    </div>
+                    <div class="ibox-footer text-right">
+                        <a href="@Url.Action("Index", "Event",new { eventId = @Model.Event.Id })" class="btn btn-danger btn-lg">Back to Event Home</a>
+                        @if (Model.ImportedScheduleItems.Any(i => i.ErrorMessage != ""))
+                        {
+                            <a class="btn btn-primary btn-lg disabled" disabled="disabled"><strong>Upload Schedule</strong></a>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary btn-lg" type="button" id="upload-schedule"><strong>Upload Schedule</strong></button>
+                        }
+                        <input type="hidden" asp-for="Event.Id" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+        <link href="~/lib/slim/slim.min.css" rel="stylesheet" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+    </environment>
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jQuery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/dataTables/datatables.min.js"></script>
+    <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript">
+        var aTable;
+        $(document).ready(function () {
+            $('#upload-schedule').on('click', function () {
+                $(this).attr("disabled", "disabled");
+                $('.ibox').children('.ibox-content').toggleClass('sk-loading');
+                $("#UploadScheduleForm").submit();
+            })
+        });
+
+        function UploadSchedule(data) {
+            if (data.success == true) {
+                swal("Schedule uploaded successfully!", {
+                    buttons: {
+                        goToList: {
+                            text: "Ok",
+                            value: "BackToList"
+                        },
+                    },
+                    icon: "success"
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "BackToList":
+                                window.location.href = "/event/@Model.Event.Id";
+                                break;
+                        }
+                    });
+            }
+            else {
+                swal("Error", "An unexpected error has occurred. Please try again.", "error");
+            }
+        }
+
+    </script>
+}

@@ -1,0 +1,265 @@
+﻿@model EventFully.EMS.Models.SpeakerViewModel
+@{
+    ViewData["Title"] = "Speakers";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>@Model.Speaker.Event.EventName: Speaker</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Event",new { eventId = @Model.Speaker.EventId })">Event Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Speakers", "Event",new { eventId = @Model.Speaker.EventId })">Speakers</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Speaker</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <form role="form" asp-action="SaveSpeaker" asp-controller="Event" data-ajax-method="POST" data-ajax="true" data-ajax-success="SaveSpeaker(data)" data-ajax-failure="SaveSpeaker(data)" id="SpeakerForm">
+                <div class="ibox  float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Speaker</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="file" id="slimProfile" name="slimProfile[]" />
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="font-normal">First Name</label>
+                                        <input asp-for="Speaker.FirstName" data-rule-minlength="2" data-rule-maxlength="50" class="form-control required" data-msg-required="Please enter a First Name" />
+                                        <span asp-validation-for="Speaker.FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Last Name</label>
+                                        <input asp-for="Speaker.LastName" data-rule-minlength="2" data-rule-maxlength="50" class="form-control required" data-msg-required="Please enter a Last Name" />
+                                        <span asp-validation-for="Speaker.LastName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Company Name</label>
+                                        <input asp-for="Speaker.CompanyName" data-rule-minlength="2" data-rule-maxlength="255" class="form-control required" data-msg-required="Please enter a Company Name" />
+                                        <span asp-validation-for="Speaker.CompanyName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Bio</label>
+                                        <textarea asp-for="Speaker.Bio" data-rule-minlength="3" data-rule-maxlength="8000" rows="10" class="form-control" data-msg-required="Please enter a Bio"></textarea>
+                                        <span asp-validation-for="Speaker.Bio" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5>Assign Sessions</h5>
+                                    </div>
+                                    <div class="panel-body">
+                                        @if (Model.Speaker.Id > 0)
+                                        {
+                                        <table class="table table-bordered table-hover" id="agendaItems">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Session</th>
+                                                    <th>Assigned</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        }
+                                        else
+                                        {
+                                            <div class="alert alert-info">
+                                                Add the user first, before assigning Sessions
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input asp-for="Speaker.EventId" type="hidden" />
+                        <input asp-for="Speaker.Id" type="hidden" />
+                        <input asp-for="Speaker.CreatedDate" type="hidden" />
+                        <input asp-for="Speaker.CreatedByUserId" type="hidden" />
+                        <input asp-for="Speaker.ModifiedDate" type="hidden" />
+                        <input asp-for="Speaker.ModifiedByUserId" type="hidden" />
+
+                    </div>
+                    <div class="ibox-footer text-right">
+                        <a href="/event/speakers/@Model.Speaker.EventId" class="btn btn-danger btn-lg"><strong>Back to Speakers</strong></a>
+                        <button class="btn btn-primary btn-lg" type="submit"><strong>Save</strong></button>
+
+                        <input type="hidden" />
+                        <input type="hidden" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+        <link href="~/lib/slim/slim.min.css" rel="stylesheet" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+    </environment>
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jQuery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/dataTables/datatables.min.js"></script>
+    <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/slim/slim.kickstart.js"></script>
+
+    <script type="text/javascript">
+        var aTable;
+        $(document).ready(function () {
+            var cropperProfile = new Slim(document.getElementById('slimProfile'),
+                {
+                    ratio: '1:1',
+                    forceSize: {
+                        width: 128,
+                        height: 128,
+                    },
+                    minSize: {
+                        width: 128,
+                        height: 128,
+                    },
+                    forceType: "jpg",
+                    label: "Click here to upload image",
+                    statusImageTooSmall: "Image is too small, minimum size is: $0 pixels."
+                });
+
+            @if (!String.IsNullOrEmpty(Model.Speaker.ProfilePic))
+            {
+                <text>cropperProfile.load('@Model.Speaker.ProfilePic');</text>
+            }
+
+            aTable = $('#agendaItems').DataTable({
+                pageLength: 25,
+                processing: true,
+                serverSide: true,
+                dom: 'lTfgitp',
+                ajax: {
+                    "type": "POST",
+                    "url": '/Event/GetSpeakerAgendaItems',
+                    "data": {"eventId": @Model.Speaker.EventId, "speakerId": @Model.Speaker.Id}
+                },
+                columns: [
+                    {
+                        data: "id",
+                        name: "id",
+                        sortable: false,
+                        searchable: false,
+                        visible: false
+                    },
+                    {
+                        data: "title",
+                        name: "title",
+                        sortable: true,
+                        searchable: true,
+                        visible: true
+                    },
+                    {
+                        data: "currentSpeakerAssigned",
+                        name: "currentSpeakerAssigned",
+                        sortable: false,
+                        searchable: false,
+                        visible: true,
+                        width: 50,
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            var cellHtml = '';
+                            if (data == true) {
+                                cellHtml += '<a href="#" id="remove-session-' + full["id"] + '" class="remove-session"><i class="fa fa-check fa-2x text-success"></i></a>';
+                            }
+                            else {
+                                cellHtml += '<a href="#" id="add-session-' + full["id"] + '" class="add-session"><i class="fa fa-times fa-2x text-muted"></i></a>';
+                            }
+                            
+                            return cellHtml;
+                        }
+                    },
+                ]
+            });
+
+            $(document).on('click', '.add-session', function () {
+                var id = this.id.replace("add-session-","");
+                $.ajax({
+                    url: "/Event/AddAgendaItemToSpeaker",
+                    type: "GET",
+                    dataType: "json",
+                    data: { agendaItemId: id, speakerId: @Model.Speaker.Id },
+                    success: function (data) {
+                        aTable.ajax.reload()
+                    }
+                });
+            });
+
+            $(document).on('click', '.remove-session', function () {
+                var id = this.id.replace("remove-session-","");
+                $.ajax({
+                    url: "/Event/RemoveAgendaItemToSpeaker",
+                    type: "GET",
+                    dataType: "json",
+                    data: { agendaItemId: id, speakerId: @Model.Speaker.Id },
+                    success: function (data) {
+                        aTable.ajax.reload()
+                    }
+                });
+            });
+        });
+
+        function SaveSpeaker(data) {
+            if (data.success == true) {
+                swal("Speaker saved successfully!", {
+                    buttons: {
+                        stayHere: {
+                            text: "Stay Here",
+                            value: "StayHere"
+                        },
+                        addAnother: {
+                            text: "Add Another",
+                            value: "AddAnother"
+                        },
+                        goToList: {
+                            text: "Back to List",
+                            value: "BackToList"
+                        },
+                    },
+                    icon: "success"
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "AddAnother":
+                                window.location.href = data.addAnotherRedirectUrl;
+                                break;
+                            case "BackToList":
+                                window.location.href = data.returnToListUrl;
+                                break;
+                            case "StayHere":
+                                window.location.href = data.reloadUrl;
+                                break;
+                        }
+                    });
+            }
+            else {
+                swal("Error", "An unexpected error has occurred. Please try again." + data.error, "error");
+            }
+        }
+
+    </script>
+}

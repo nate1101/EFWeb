@@ -1,0 +1,114 @@
+﻿@model EventFully.Models.Order
+@{
+    ViewData["Title"] = "Order";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Order</h2>
+    </div>
+    <div class="col-lg-4">
+        <div class="title-action">
+            <a href="@Url.Action("invoicePrint", "Account", new { orderId = Model.Id })" target="_blank" class="btn btn-primary text-white"><i class="fa fa-print"></i> Print Invoice </a>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content p-xl">
+        <div class="row">
+            <div class="col-sm-6">
+                <h5>From:</h5>
+                <address>
+                    <strong>EventBx</strong><br>
+                    101 Test<br>
+                    Fayetteville, AR<br>
+                    <abbr title="Phone">P:</abbr> (444) 444-4444
+                </address>
+            </div>
+
+            <div class="col-sm-6 text-right">
+                <h4>Order No.</h4>
+                <h4 class="text-navy">@Model.Id</h4>
+                <span>To:</span>
+                <address>
+                    <strong>@Model.BillingName</strong><br>
+                    @Model.BillingAddressLine1<br>
+                    @if(!String.IsNullOrEmpty(Model.BillingAddressApt))
+                    {
+                        @Model.BillingAddressApt<br />
+                    }
+                    @Model.BillingAddressCity, @Model.BillingAddressState @Model.BillingAddressZip<br>
+                    <abbr title="Email">E:</abbr> @Model.EmailAddress
+                </address>
+                <p>
+                    <span><strong>Order Date:</strong> @Model.OrderDate.ToShortDateString()</span><br />
+                </p>
+            </div>
+        </div>
+
+        <div class="table-responsive m-t">
+            <table class="table invoice-table">
+                <thead>
+                    <tr>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                        <th>Item Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItems)
+                    {
+                    <tr>
+                        <td>
+                            <div><strong>@item.Description</strong></div>
+                        </td>
+                        <td>@item.Quantity</td>
+                        <td>@item.ItemAmount.ToString("c")</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- /table-responsive -->
+
+        <table class="table invoice-total">
+            <tbody>
+                <tr>
+                    <td><strong>Total :</strong></td>
+                    <td>@Model.OrderItems.Sum(i => i.Quantity * i.ItemAmount).ToString("c")</td>
+                </tr>
+                <tr>
+                    <td><strong>Payments :</strong></td>
+                    <td>
+                        @if (Model.StripePaymentId != null)
+                        {
+                            @Model.OrderItems.Sum(i => i.Quantity * i.ItemAmount).ToString("c")
+                        }
+                        else
+                        {
+                            @:$0.00
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>TOTAL DUE:</strong></td>
+                    <td>
+                        @if (Model.StripePaymentId != null)
+                        {
+                            @:$0.00
+                        }
+                        else
+                        {
+                            @Model.OrderItems.Sum(i => i.Quantity * i.ItemAmount).ToString("c")
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="well m-t">
+            <strong>Comments</strong>
+            Have any questions? Please email <a href="mailto:support@eventbx.com">support@eventbx.com</a>.
+        </div>
+    </div>
+</div>
+

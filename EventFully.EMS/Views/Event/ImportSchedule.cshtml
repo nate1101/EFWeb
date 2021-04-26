@@ -1,0 +1,122 @@
+﻿@model EventFully.EMS.Models.ImportScheduleViewModel
+@{
+    ViewData["Title"] = "Import Schedule";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>@Model.Event.EventName: Import Schedule</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Event",new { eventId = @Model.Event.Id })">Event Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Import</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <form role="form" asp-action="ImportSchedule" asp-controller="Event" enctype="multipart/form-data" method="POST" id="ImportScheduleForm">
+                <div class="ibox  float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Select File</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="alert alert-info">To import your your schedule, first <strong><a href="https://assets.eventbx.com/EventBx-Schedule-Worksheet.xlsx">download the template</a></strong> and then populate the information per the instructions.</div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Select File <small>(.xls or .xlsx format)</small></label>
+                            <div class="col-md-8">
+                                <div class="custom-file">
+                                    <input type="file" id="fileScheduleItems" name="importFile" class="custom-file-input required" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                                    <label for="fileScheduleItems" class="custom-file-label">Choose file...</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer text-right">
+                        <a href="@Url.Action("Index", "Event",new { eventId = @Model.Event.Id })" class="btn btn-danger btn-lg">Back to Event Home</a>
+                        <button class="btn btn-primary btn-lg" type="submit"><strong>Import Schedule</strong></button>
+                        <input type="hidden" asp-for="Event.Id" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        @if(Model.ImportedScheduleItems != null)
+        {
+            <h1>Items</h1>
+        }
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+        <link href="~/lib/slim/slim.min.css" rel="stylesheet" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+    </environment>
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jQuery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/dataTables/datatables.min.js"></script>
+    <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript">
+        var aTable;
+        $(document).ready(function () {
+            $('.custom-file-input').on('change', function () {
+                let fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').addClass("selected").html(fileName);
+            }); 
+        });
+
+        function ImportSchedule(data) {
+            //if (data.success == true) {
+            //    swal("Speaker saved successfully!", {
+            //        buttons: {
+            //            stayHere: {
+            //                text: "Stay Here",
+            //                value: "StayHere"
+            //            },
+            //            addAnother: {
+            //                text: "Add Another",
+            //                value: "AddAnother"
+            //            },
+            //            goToList: {
+            //                text: "Back to List",
+            //                value: "BackToList"
+            //            },
+            //        },
+            //        icon: "success"
+            //    })
+            //        .then((value) => {
+            //            switch (value) {
+            //                case "AddAnother":
+            //                    window.location.href = data.addAnotherRedirectUrl;
+            //                    break;
+            //                case "BackToList":
+            //                    window.location.href = data.returnToListUrl;
+            //                    break;
+            //                case "StayHere":
+            //                    window.location.href = data.reloadUrl;
+            //                    break;
+            //            }
+            //        });
+            //}
+            //else {
+            //    swal("Error", "An unexpected error has occurred. Please try again.", "error");
+            //}
+        }
+
+    </script>
+}

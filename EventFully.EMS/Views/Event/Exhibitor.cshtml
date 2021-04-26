@@ -1,0 +1,208 @@
+﻿@model EventFully.EMS.Models.ExhibitorViewModel
+@{
+    ViewData["Title"] = "Exhibitor";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>@Model.Exhibitor.EventName: Exhibitor</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Event",new { eventId = @Model.Exhibitor.EventId })">Event Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Exhibitors", "Event",new { eventId = @Model.Exhibitor.EventId })">Exhibitors</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Exhibitor</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <form role="form" asp-action="SaveExhibitor" asp-controller="Event" data-ajax-method="POST" data-ajax="true" data-ajax-success="SaveExhibitor(data)" data-ajax-failure="SaveExhibitor(data)" id="ExhibitorForm">
+                <div class="ibox  float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Exhibitor</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="font-normal">Profile Pic</label>
+                                    <input type="file" id="slimProfile" name="slimProfile[]" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="font-normal">Exhibitor Name</label>
+                                    <input asp-for="Exhibitor.ExhibitorName" data-rule-minlength="2" data-rule-maxlength="255" class="form-control required" data-msg-required="Please enter a Exhibitor Name" />
+                                    <span asp-validation-for="Exhibitor.ExhibitorName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Booth Location</label>
+                                    <input asp-for="Exhibitor.BoothLocation" data-rule-minlength="2" data-rule-maxlength="100" class="form-control" placeholder="Enter location, e.g. Booth 1234" data-msg-required="Please enter a Booth Location or Number" />
+                                    <span asp-validation-for="Exhibitor.BoothLocation" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Address</label>
+                                    <input asp-for="Exhibitor.Address1" data-rule-minlength="2" data-rule-maxlength="100" class="form-control required" data-msg-required="Please enter a Address" />
+                                    <span asp-validation-for="Exhibitor.Address1" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Address2</label>
+                                    <input asp-for="Exhibitor.Address2" data-rule-minlength="2" data-rule-maxlength="100" class="form-control" data-msg-required="Please enter a Address2" />
+                                    <span asp-validation-for="Exhibitor.Address2" class="text-danger"></span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="Exhibitor.City">City</label>
+                                        <input type="text" asp-for="Exhibitor.City" data-rule-minlength="2" data-rule-maxlength="50" class="form-control required" placeholder="City">
+                                        <span asp-validation-for="Exhibitor.City" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Exhibitor.State">State</label>
+                                        <select asp-for="Exhibitor.State" asp-items="@ViewBag.StateList" class="form-control required" data-msg-required="Please select a State">
+                                            <option value="">Please Select a State</option>
+                                        </select>
+                                        <span asp-validation-for="Exhibitor.State" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Event.PostalCode">Zip Code</label>
+                                        <input type="text" asp-for="Exhibitor.PostalCode" data-rule-minlength="5" data-rule-maxlength="5" class="form-control required" placeholder="Zip">
+                                        <span asp-validation-for="Exhibitor.PostalCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Contact Name</label>
+                                    <input asp-for="Exhibitor.ContactName" data-rule-minlength="2" data-rule-maxlength="100" class="form-control required" data-msg-required="Please enter a Contact Name" />
+                                    <span asp-validation-for="Exhibitor.ContactName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Phone</label>
+                                    <input asp-for="Exhibitor.ContactPhone" data-rule-minlength="14" data-rule-maxlength="14" class="form-control required" data-msg-required="Please enter a Phone" />
+                                    <span asp-validation-for="Exhibitor.ContactPhone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">Email</label>
+                                    <input asp-for="Exhibitor.ContactEmail" data-rule-minlength="2" data-rule-maxlength="100" class="form-control required" data-msg-required="Please enter an Email Address" />
+                                    <span asp-validation-for="Exhibitor.ContactEmail" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-normal">About</label>
+                                    <textarea asp-for="Exhibitor.Description" data-rule-minlength="3" data-rule-maxlength="8000" rows="10" class="form-control" data-msg-required="Please enter a Description"></textarea>
+                                    <span asp-validation-for="Exhibitor.Description" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input asp-for="Exhibitor.EventId" type="hidden" />
+                        <input asp-for="Exhibitor.Id" type="hidden" />
+                        <input asp-for="Exhibitor.CreatedDate" type="hidden" />
+                        <input asp-for="Exhibitor.CreatedByUserId" type="hidden" />
+                        <input asp-for="Exhibitor.ModifiedDate" type="hidden" />
+                        <input asp-for="Exhibitor.ModifiedByUserId" type="hidden" />
+
+                    </div>
+                    <div class="ibox-footer text-right">
+                        <a href="/event/exhibitors/@Model.Exhibitor.EventId" class="btn btn-danger btn-lg"><strong>Back to Exhibitors</strong></a>
+                        <button class="btn btn-primary btn-lg" type="submit"><strong>Save</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+        <link href="~/lib/slim/slim.min.css" rel="stylesheet" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+        <link href="~/lib/jasny-bootstrap/dist/css/jasny-bootstrap.css" rel="stylesheet" />
+    </environment>
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jQuery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/dataTables/datatables.min.js"></script>
+    <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/slim/slim.kickstart.js"></script>
+    <script src="~/lib/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
+
+    <script type="text/javascript">
+        var aTable;
+        $(document).ready(function () {
+            var cropperProfile = new Slim(document.getElementById('slimProfile'),
+                {
+                    ratio: '1:1',
+                    forceSize: {
+                        width: 200,
+                        height: 200,
+                    },
+                    minSize: {
+                        width: 200,
+                        height: 200,
+                    },
+                    forceType: "jpg",
+                    label: "Click here to upload image",
+                    statusImageTooSmall: "Image is too small, minimum size is: $0 pixels."
+                });
+
+            @if (!String.IsNullOrEmpty(Model.Exhibitor.ProfilePic))
+            {
+                <text>cropperProfile.load('@Model.Exhibitor.ProfilePic');</text>
+            }
+
+            $("#Exhibitor_ContactPhone").inputmask({
+                mask: '(999) 999-9999'
+            })
+        });
+
+        function SaveExhibitor(data) {
+            if (data.success == true) {
+                swal("Exhibitor saved successfully!", {
+                    buttons: {
+                        stayHere: {
+                            text: "Stay Here",
+                            value: "StayHere"
+                        },
+                        addAnother: {
+                            text: "Add Another",
+                            value: "AddAnother"
+                        },
+                        goToList: {
+                            text: "Back to List",
+                            value: "BackToList"
+                        },
+                    },
+                    icon: "success"
+                })
+                    .then((value) => {
+                        switch (value) {
+                            case "AddAnother":
+                                window.location.href = data.addAnotherRedirectUrl;
+                                break;
+                            case "BackToList":
+                                window.location.href = data.returnToListUrl;
+                                break;
+                            case "StayHere":
+                                window.location.href = data.reloadUrl;
+                                break;
+                        }
+                    });
+            }
+            else {
+                swal("Error", "An unexpected error has occurred. Please try again.", "error");
+            }
+        }
+
+    </script>
+}

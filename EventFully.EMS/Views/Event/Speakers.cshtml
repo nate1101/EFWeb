@@ -1,0 +1,225 @@
+﻿@model EventFully.EMS.Models.EventViewModel
+@{
+    ViewData["Title"] = "Speakers";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>@Model.Event.EventName: Speakers</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Event",new { eventId = @Model.Event.Id })">Event Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Speakers</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-4 text-right">
+        <a href="@Url.Action("Index", "Event",new { eventId = @Model.Event.Id })" class="btn btn-danger mt-4"><i class="fa fa-backward"></i> Back to Event Home</a>
+        <a href="/event/speakers/editspeaker/@Model.Event.Id/0" class="btn btn-primary mt-4"><i class="fa fa-plus-circle"></i> Add Speaker</a>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Add, Edit or Delete Speakers</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered table-hover" id="speakers">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Pic</th>
+                                <th>Speaker Name</th>
+                                <th>Company</th>
+                                <th>Bio</th>
+                                <th>Sessions</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+    </environment>
+}
+
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/dataTables/datatables.min.js"></script>
+        <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+        var sTable;
+        $(document).ready(function () {
+
+            $(document).on('click', '.delete-speaker', function () {
+                var id = this.id.replace("delete-speaker-", "");
+                var sessions = $(this).data("sessions");
+                var message = "This speaker will be deleted permanently"
+                if (sessions > 0) {
+                    message += " and they will be unassigned from " + sessions + " session(s)!";
+                }
+                swal({
+                    title: "Are you sure?",
+                    text: message,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: "/Event/DeleteSpeaker",
+                                type: "GET",
+                                dataType: "json",
+                                data: { speakerId: id },
+                                success: function (data) {
+                                    swal("The speaker has been deleted.", {
+                                        icon: "success",
+                                    });
+                                    sTable.ajax.reload()
+                                }
+                            });
+                            
+                        }
+                    });
+
+                
+            });
+
+            sTable = $('#speakers').DataTable({
+                pageLength: 25,
+                processing: true,
+                serverSide: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    { extend: 'copy' },
+                    { extend: 'csv' },
+                    { extend: 'excel', title: 'Speakers' },
+                    { extend: 'pdf', title: 'Speakers' },
+
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+                ajax: {
+                    "type": "POST",
+                    "url": '/Event/GetSpeakerListByEvent',
+                    "data": {"eventId": @Model.Event.Id}
+                },
+                columns: [
+                    {
+                        data: "id",
+                        name: "id",
+                        sortable: false,
+                        searchable: false,
+                        visible: false
+                    },
+                    {
+                        data: "profilePic",
+                        name: "profilePic",
+                        sortable: false,
+                        searchable: false,
+                        visible: true,
+                        render: function (data, type, full, meta) {
+                            var cellHtml = '';
+                            if (data != null) {
+                                cellHtml += '<img src="' + data + '" style="height: 100px" />';
+                            }
+                            return cellHtml;
+                        }
+                    },
+                    {
+                        data: "fullName",
+                        name: "fullName",
+                        sortable: true,
+                        searchable: true,
+                        visible: true
+                    },
+                    {
+                        data: "companyName",
+                        name: "companyName",
+                        sortable: true,
+                        searchable: true,
+                        visible: true
+                    },
+                    {
+                        data: "bio",
+                        name: "bio",
+                        sortable: false,
+                        searchable: false,
+                        visible: true,
+                        render: function (data, type, full, meta) {
+                            var cellHtml = '';
+                            if (data != null) {
+                                cellHtml += '<i class="fa fa-check"></i>';
+                            }
+                            return cellHtml;
+                        }
+                    },
+                    {
+                        data: "sessionsAssigned",
+                        name: "sessionsAssigned",
+                        sortable: true,
+                        searchable: true,
+                        visible: true
+                    },
+                    {
+                        data: "id",
+                        name: "actions",
+                        sortable: false,
+                        searchable: false,
+                        className: "text-center",
+                        width: 50,
+                        visible: true,
+                        render: function (data, type, full, meta) {
+                            var cellHtml = '';
+                            cellHtml += '<a href="/event/speakers/editspeaker/' + full["eventId"] + '/' + data + '" class="mb-sm btn btn-success"><i class="fa fa-edit"></i></a>';
+                            return cellHtml;
+                        }
+                    },
+                    {
+                        data: "id",
+                        name: "actions",
+                        sortable: false,
+                        searchable: false,
+                        className: "text-center",
+                        width: 50,
+                        visible: true,
+                        render: function (data, type, full, meta) {
+                            var cellHtml = '';
+                            cellHtml += '<a href="#" id="delete-speaker-' + data + '" data-sessions="' + full["sessionsAssigned"] + '" class="mb-sm btn btn-danger delete-speaker"><i class="fa fa-trash"></i></a>';
+                            return cellHtml;
+                        }
+                    },
+                ]
+            });
+
+
+        });
+
+
+    </script>
+}

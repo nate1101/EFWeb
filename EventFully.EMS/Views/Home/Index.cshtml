@@ -1,0 +1,132 @@
+﻿@model IEnumerable<EventFully.Models.Event>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        @if (@Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>@item.EventName</h5>
+                        </div>
+                        <div>
+                            <div class="ibox-content no-padding border-left-right">
+                                <img alt="image" class="img-fluid" src="@item.EventBanner">
+                                @if (item.Published)
+                                {
+                                    <span class="label label-success published-badge"><i class="fa fa-check-circle"></i>  Published</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-warning published-badge"><i class="fa fa-remove"></i>  Published</span>
+                                }
+                                @if (item.EventOrder != null)
+                                {
+                                    <span class="label label-primary paid-badge"><i class="fa fa-check-circle"></i>  Paid</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-warning paid-badge"><i class="fa fa-remove"></i>  Paid</span>
+                                }
+                            </div>
+                            <div class="ibox-content profile-content">
+                                <h4><strong>@item.StartDate.ToShortDateString() - @item.EndDate.ToShortDateString()</strong></h4>
+                                <p><i class="fa fa-map-marker"></i> @item.City, @item.State</p>
+                                <h5>
+                                    Description
+                                </h5>
+                                <p class="description-box">
+                                    @item.Description
+                                </p>
+                                @*<div class="row m-t-lg">
+                                        <div class="col-md-4">
+                                            <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
+                                            <h5><strong>169</strong> Sessions/Events</h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span class="line">5,3,9,6,5,9,7,3,5,2</span>
+                                            <h5><strong>28</strong> Active Participants</h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span class="bar">5,3,2,-1,-3,-2,2,3,5,2</span>
+                                            <h5><strong>240</strong> Active Users</h5>
+                                        </div>
+                                    </div>*@
+                                <div class="user-button">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="/event/@item.Id" class="btn btn-success btn-sm btn-block"><i class="fa fa-edit"></i> Edit Event</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="firstEventBox animated fadeInDown">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="ibox-content">
+
+                            <h2 class="font-bold">Welcome Aboard!</h2>
+
+                            <p>
+                                It looks like this is your first event. Click the button below to get started.
+                            </p>
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+
+                                    <a href="Event/EditEvent/0" class="btn btn-primary block full-width m-b">Create My Event</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <environment names="Development">
+        <script src="~/lib/peity/jquery.peity.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/peity/jquery.peity.min.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("span.pie").peity("pie", {
+                fill: ['#1ab394', '#d7d7d7', '#ffffff']
+            })
+
+            $(".line").peity("line", {
+                fill: '#1ab394',
+                stroke: '#169c81',
+            })
+
+            $(".bar").peity("bar", {
+                fill: ["#1ab394", "#d7d7d7"]
+            })
+
+
+        });
+    </script>
+}
+

@@ -1,0 +1,40 @@
+.landing-page .navbar-default .navbar-brand{
+    background-color: transparent;
+}
+
+    .landing-page .navbar-default .navbar-brand img {
+        max-width: 200px;
+        margin-top: 10px;
+    }
+
+.landing-page .navbar-default .nav li a{
+    color: #999c9e;
+}
+
+.landing-page .navbar-wrapper .navbar {
+    background-color: #FFF;
+    border-radius: 0;
+    border-bottom: solid 2px #1b859d !important;
+}
+
+.dashboard-image{
+    max-width: 325px;
+}
+
+#cookieConsent{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    margin-bottom: 0;
+}
+
+section.generic{
+    margin-top: 100px;
+}
+
+.landing-page .navbar-default .navbar-brand:hover,
+.landing-page .navbar-default .navbar-brand:focus {
+    background: #FFF;
+    color: #fff;
+}

@@ -1,0 +1,812 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "EventBx";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139919793-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-139919793-1');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EventBx, the simple, affordable event management with both the organizer and attendee in mind." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Event Management Services | EventBx" />
+    <meta property="og:description" content="EventBx, the simple, affordable event manaegment with both the organizer and attendee in mind." />
+    <meta property="og:url" content="https://eventbx.com/" />
+    <meta property="og:site_name" content="EventBx" />
+    <meta property="og:image" content="https://eventbx.com/images/landing/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="EventBx, the simple, affordable event management with both the organizer and attendee in mind." />
+    <meta name="twitter:title" content="Event Management Services | EventBx" />
+    <meta name="twitter:image" content="https://eventbx.com/images/landing/logo.png" />
+    <title>@ViewData["Title"]</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/images/landing/favicon.ico">
+    <link rel="canonical" href="https://eventbx.com/" />
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+    </environment>
+
+</head>
+
+<body id="page-top" class="landing-page">
+    <partial name="_CookieConsentPartial" />
+    <div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-expand-md" role="navigation">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="~/images/landing/logo.png" />
+                </a>
+                <div class="navbar-header page-scroll">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="nav-link page-scroll" href="#page-top">Home</a></li>
+                        <li><a class="nav-link page-scroll" href="#features">Features</a></li>
+                        @*<li><a class="nav-link page-scroll" href="#team">Team</a></li>*@
+                        <li><a class="nav-link page-scroll" href="#testimonials">Testimonials</a></li>
+                        <li><a class="nav-link page-scroll" href="#pricing">Pricing</a></li>
+                        <li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="inSlider" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#inSlider" data-slide-to="0" class="active"></li>
+            <li data-target="#inSlider" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>
+                            Simple, affordable<br />
+                            event management<br />
+                            with both the organizer<br />
+                            and attendee in mind
+                        </h1>
+                        @*<p>Lorem Ipsum is simply dummy text of the printing.</p>*@
+                        <p>
+                            <a class="btn btn-lg btn-primary" href="#features" role="button">READ MORE</a>
+                        </p>
+                    </div>
+                    <div class="carousel-image wow zoomIn">
+                        <img src="~/Images/landing/laptop.png" alt="laptop" />
+                    </div>
+                </div>
+                <!-- Set background for slide in css -->
+                <div class="header-back one"></div>
+
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="carousel-caption blank">
+                        <h1>Your event <br /> in the palm of your hand.</h1>
+                        <p>Information delivered simply and real-time</p>
+                        <p><a class="btn btn-lg btn-primary" href="#features" role="button">Learn more</a></p>
+                    </div>s
+                </div>
+                <!-- Set background for slide in css -->
+                <div class="header-back two"></div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#inSlider" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#inSlider" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    <section id="features" class="container services">
+        <div class="row">
+            <div class="col-sm-3">
+                <h2>Informative</h2>
+                <p>Shouldn't your attendees have access to all facets of your event? Sessions, tracks, registration information, speakers, exhibitors and more all in the palm of their hand.</p>
+                @*<p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>*@
+            </div>
+            <div class="col-sm-3">
+                <h2>Simple</h2>
+                <p>Setting up an event in our Event Management System should be as easy as 1-2-3. Well, it is. Upload your sessions, tracks and speakers with the push of a button, publish and then fine-tune.</p>
+                @*<p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>*@
+            </div>
+            <div class="col-sm-3">
+                <h2>Affordable</h2>
+                <p>An event is expensive enough to host and manage. That's why we keep our features simple and our pricing simpler. We offer a single price point that is more than competitive in the market and take the guess-work out of costs.</p>
+                @*<p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>*@
+            </div>
+            <div class="col-sm-3">
+                <h2>Intuitive</h2>
+                <p>We like to keep our Event Management System and mobile app simple, concise and intuitive. Every task associated with creating an event is clear and simple. With all that goes into an hosting an event, this should be the easy part.</p>
+                @*<p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>*@
+            </div>
+        </div>
+    </section>
+
+    <section class="container features">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Intuitive and Simple<br /> <span class="navy"> Event-ready mobile experience for your attendees</span> </h1>
+                @*<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>*@
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center wow fadeInLeft">
+                <div>
+                    <i class="fa fa-calendar features-icon"></i>
+                    <h2>Full Schedule</h2>
+                    <p>All agenda items are available in an easy to navigate calendar with track filtering.</p>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-clock-o features-icon"></i>
+                    <h2>Reminders</h2>
+                    <p>Never miss out on a session with list and push notification reminders.</p>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-handshake-o features-icon"></i>
+                    <h2>Sponsors</h2>
+                    <p>Highlight your sponsors with business and contact information.</p>
+                </div>
+            </div>
+            <div class="col-md-6 text-center  wow zoomIn">
+                <img src="~/Images/landing/dashboard.png" alt="dashboard" class="img-fluid dashboard-image">
+            </div>
+            <div class="col-md-3 text-center wow fadeInRight">
+                <div>
+                    <i class="fa fa-calendar-check-o features-icon"></i>
+                    <h2>Personalized Agenda</h2>
+                    <p>Customize your own schedule by adding agenda items to your own personal calendar.</p>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-users features-icon"></i>
+                    <h2>Speakers</h2>
+                    <p>Get to know the event's speakers, their background and the sessions they will be leading.</p>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-building features-icon"></i>
+                    <h2>Exhibitors</h2>
+                    <p>Let your attendees know about Exhibitors and the products and services they have to offer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container features">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Event Management Features</h1>
+                <p>Here are just some of the features of our intuitive Event Management System</p>
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-4 features-text wow fadeInLeft">
+                @*<small>INSPINIA</small>*@
+                <h2><strong>Event Dashboard</strong></h2>
+                <p>The centerpoint of your event, this is the launch point for all your event's features and information.</p>
+                @*<a href="" class="btn btn-primary">Learn more</a>*@
+            </div>
+            <div class="col-lg-8 text-right wow fadeInRight">
+                <img src="~/Images/landing/dashboard-s.png" alt="dashboard" class="img-fluid float-right">
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-8 text-right wow fadeInRight">
+                <img src="~/Images/landing/schedule-s.png" alt="dashboard" class="img-fluid float-right">
+            </div>
+            <div class="col-lg-4 features-text wow fadeInLeft">
+                @*<small>INSPINIA</small>*@
+                <h2><strong>Schedule</strong></h2>
+                <p>Easily add items to your schedule along with speakers and tracks. All in one place! Displayed in an easy-to-use agenda format that allows you to visualize your event schedule from beginning to end.</p>
+                @*<a href="" class="btn btn-primary">Learn more</a>*@
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-4 features-text wow fadeInLeft">
+                @*<small>INSPINIA</small>*@
+                <h2><strong>Schedule Upload</strong></h2>
+                <p>Download our schedule template and enter your event's sessions, tracks, speakers and locations directly into a spreadsheet. Upload it using our simple interface and do the housekeeping. Voila!</p>
+                @*<a href="" class="btn btn-primary">Learn more</a>*@
+            </div>
+            <div class="col-lg-8 text-right wow fadeInRight">
+                <img src="~/Images/landing/upload-s.png" alt="dashboard" class="img-fluid float-right">
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-8 text-right wow fadeInRight">
+                <img src="~/Images/landing/speaker-s.png" alt="dashboard" class="img-fluid float-right">
+            </div>
+            <div class="col-lg-4 features-text wow fadeInLeft">
+                @*<small>INSPINIA</small>*@
+                <h2><strong>Speakers</strong></h2>
+                <p>Highlight your speakers by entering background, contact information and bios. You can even assign the speakers to agenda items all in one place!</p>
+                @*<a href="" class="btn btn-primary">Learn more</a>*@
+            </div>
+        </div>
+    </section>
+
+    @*<section id="team" class="gray-section team">
+            <div class="container">
+                <div class="row m-b-lg">
+                    <div class="col-lg-12 text-center">
+                        <div class="navy-line"></div>
+                        <h1>Our Team</h1>
+                        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 wow fadeInLeft">
+                        <div class="team-member">
+                            <img src="~/Images/landing/avatar3.jpg" class="img-fluid rounded-circle img-small" alt="">
+                            <h4><span class="navy">Amelia</span> Smith</h4>
+                            <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus. </p>
+                            <ul class="list-inline social-icon">
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="team-member wow zoomIn">
+                            <img src="~/Images/landing/avatar1.jpg" class="img-fluid rounded-circle" alt="">
+                            <h4><span class="navy">John</span> Novak</h4>
+                            <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
+                            <ul class="list-inline social-icon">
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeInRight">
+                        <div class="team-member">
+                            <img src="~/Images/landing/avatar2.jpg" class="img-fluid rounded-circle img-small" alt="">
+                            <h4><span class="navy">Peter</span> Johnson</h4>
+                            <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
+                            <ul class="list-inline social-icon">
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center m-t-lg m-b-lg">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    @*<section class="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="navy-line"></div>
+                        <h1>Even more great feautres</h1>
+                        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+                    </div>
+                </div>
+                <div class="row features-block">
+                    <div class="col-lg-3 features-text wow fadeInLeft">
+                        <small>INSPINIA</small>
+                        <h2>Perfectly designed </h2>
+                        <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+                        <a href="" class="btn btn-primary">Learn more</a>
+                    </div>
+                    <div class="col-lg-6 text-right m-t-n-lg wow zoomIn">
+                        <img src="~/Images/landing/iphone.jpg" class="img-fluid" alt="dashboard">
+                    </div>
+                    <div class="col-lg-3 features-text text-right wow fadeInRight">
+                        <small>INSPINIA</small>
+                        <h2>Perfectly designed </h2>
+                        <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+                        <a href="" class="btn btn-primary">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+        </section>*@
+
+    @*<section class="timeline gray-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="navy-line"></div>
+                        <h1>Our workflow</h1>
+                        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+                    </div>
+                </div>
+                <div class="row features-block">
+
+                    <div class="col-lg-12">
+                        <div id="vertical-timeline" class="vertical-container light-timeline center-orientation">
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon navy-bg">
+                                    <i class="fa fa-briefcase"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>Meeting</h2>
+                                    <p>
+                                        Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products. Below please find the current status of the sale.
+                                    </p>
+                                    <a href="#" class="btn btn-xs btn-primary"> More info</a>
+                                    <span class="vertical-date"> Today <br /> <small>Dec 24</small> </span>
+                                </div>
+                            </div>
+
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon navy-bg">
+                                    <i class="fa fa-file-text"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>Decision</h2>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+                                    <a href="#" class="btn btn-xs btn-primary"> More info</a>
+                                    <span class="vertical-date"> Tomorrow <br /> <small>Dec 26</small> </span>
+                                </div>
+                            </div>
+
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon navy-bg">
+                                    <i class="fa fa-cogs"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>Implementation</h2>
+                                    <p>Go to shop and find some products. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
+                                    <a href="#" class="btn btn-xs btn-primary"> More info</a>
+                                    <span class="vertical-date"> Monday <br /> <small>Jan 02</small> </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>*@
+
+    <section id="testimonials" class="navy-section testimonials" style="margin-top: 0">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center wow zoomIn">
+                    <i class="fa fa-comment big-icon"></i>
+                    <h1>
+                        What our users say
+                    </h1>
+                    <div class="testimonials-text">
+                        <i>"There are so many other companies that have made event management so complicated that it made me want to throw my hands in the air! EventBx made the process simple and intuitive and actually enjoyable. I had my conference up and running in an hour!"</i>
+                    </div>
+                    <small>
+                        <strong>- Cade and Elizabeth Harris</strong>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    @*<section class="comments gray-section" style="margin-top: 0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="navy-line"></div>
+                        <h1>What our partners say</h1>
+                        <p>Donec sed odio dui. Etiam porta sem malesuada. </p>
+                    </div>
+                </div>
+                <div class="row features-block">
+                    <div class="col-lg-4">
+                        <div class="bubble">
+                            "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                        </div>
+                        <div class="comments-avatar">
+                            <a href="" class="float-left">
+                                <img alt="image" src="~/Images/landing/avatar3.jpg">
+                            </a>
+                            <div class="media-body">
+                                <div class="commens-name">
+                                    Andrew Williams
+                                </div>
+                                <small class="text-muted">Company X from California</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="bubble">
+                            "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                        </div>
+                        <div class="comments-avatar">
+                            <a href="" class="float-left">
+                                <img alt="image" src="~/Images/landing/avatar1.jpg">
+                            </a>
+                            <div class="media-body">
+                                <div class="commens-name">
+                                    Andrew Williams
+                                </div>
+                                <small class="text-muted">Company X from California</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="bubble">
+                            "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+                        </div>
+                        <div class="comments-avatar">
+                            <a href="" class="float-left">
+                                <img alt="image" src="~/Images/landing/avatar2.jpg">
+                            </a>
+                            <div class="media-body">
+                                <div class="commens-name">
+                                    Andrew Williams
+                                </div>
+                                <small class="text-muted">Company X from California</small>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </section>*@
+
+    <section class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>More features</h1>
+                    <p>Here are a few more features</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-lg-offset-1 features-text">
+                    @*<small>INSPINIA</small>*@
+                    <h2>Tracks</h2>
+                    <i class="fa fa-tasks big-icon float-right"></i>
+                    <p>Categorize your sessions using tracks so that your attendees can filter and search agenda items by the category that is most relevant to them.</p>
+                </div>
+                <div class="col-lg-5 features-text">
+                    @*<small>INSPINIA</small>*@
+                    <h2>Exhibitors</h2>
+                    <i class="fa fa-building big-icon float-right"></i>
+                    <p>Give your attendees a searchable, concise way to find exhibitors that interest them.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-lg-offset-1 features-text">
+                    @*<small>INSPINIA</small>*@
+                    <h2>Sponsors</h2>
+                    <i class="fa fa-handshake-o big-icon float-right"></i>
+                    <p>Highlight the businesses and services that help make all of this possible. Your sponsors!</p>
+                </div>
+                <div class="col-lg-5 features-text">
+                    @*<small>INSPINIA</small>*@
+                    <h2>Security</h2>
+                    <i class="fa fa-lock big-icon float-right"></i>
+                    <p>Sometimes we all need a little help to put on an epic event. Invite others to help manage your event experience.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="row m-b-lg">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>App Pricing</h1>
+                    <p>Simple and straightforward pricing</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 wow zoomIn">
+                    @*<ul class="pricing-plan list-unstyled">
+                            <li class="pricing-title">
+                                Basic
+                            </li>
+                            <li class="pricing-desc">
+                                Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.
+                            </li>
+                            <li class="pricing-price">
+                                <span>$16</span> / month
+                            </li>
+                            <li>
+                                Dashboards
+                            </li>
+                            <li>
+                                Projects view
+                            </li>
+                            <li>
+                                Contacts
+                            </li>
+                            <li>
+                                Calendar
+                            </li>
+                            <li>
+                                AngularJs
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-xs" href="#">Signup</a>
+                            </li>
+                        </ul>*@
+                </div>
+
+                <div class="col-lg-4 wow zoomIn">
+                    <ul class="pricing-plan list-unstyled selected">
+                        <li class="pricing-title">
+                            Standard
+                        </li>
+                        <li class="pricing-desc">
+                            Feature a single event for 12 months
+                        </li>
+                        <li class="pricing-price">
+                            <h2 class="m-0"><span style="text-decoration:line-through;" class="text-muted">&nbsp;$499&nbsp;</span></h2>
+                            <h1><span>$249</span></h1>
+                            <p class="text-strong">50% off until July 1st, 2019</p>
+                        </li>
+                        <li>
+                            Dashboards
+                        </li>
+                        <li>
+                            Schedule
+                        </li>
+                        <li>
+                            Speakers
+                        </li>
+                        <li>
+                            Exhibitors
+                        </li>
+                        <li>
+                            Sponsors
+                        </li>
+                        <li>
+                            More
+                        </li>
+                        <li>
+                            <strong>Free Support</strong>
+                        </li>
+                        <li class="plan-action">
+                            <a class="btn btn-primary btn-xs" href="https://admin.eventbx.com/Account/SignUp">Sign Up For Free</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 wow zoomIn">
+                    @*<ul class="pricing-plan list-unstyled">
+                            <li class="pricing-title">
+                                Premium
+                            </li>
+                            <li class="pricing-desc">
+                                Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.
+                            </li>
+                            <li class="pricing-price">
+                                <span>$160</span> / month
+                            </li>
+                            <li>
+                                Dashboards
+                            </li>
+                            <li>
+                                Projects view
+                            </li>
+                            <li>
+                                Contacts
+                            </li>
+                            <li>
+                                Calendar
+                            </li>
+                            <li>
+                                AngularJs
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-xs" href="#">Signup</a>
+                            </li>
+                        </ul>*@
+                </div>
+            </div>
+            <div class="row m-t-lg">
+                <div class="col-lg-12 text-center m-t-lg">
+                    @*<p>Simple and straightforward pricing</p>*@
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="contact" class="gray-section contact">
+        <div class="container">
+            <div class="row m-b-lg">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Contact Us</h1>
+                    <p>Got questions? We have answers!</p>
+                </div>
+            </div>
+            <div class="row m-b-lg justify-content-center">
+                <div class="col-lg-6 col-lg-offset-3 text-center">
+
+                    <h1>
+                        <strong><span class="navy">EventBx</span></strong>
+                    </h1>
+                    @*795 Folsom Ave, Suite 600<br />
+                        San Francisco, CA 94107<br />*@
+                    (479) 444-4444<br />
+                    Support: support@eventbx.com<br />
+                    Sales: sales@eventbx.com
+
+
+                </div>
+                @*<div class="col-lg-4">
+                        <p class="text-color">
+                            Consectetur adipisicing elit. Aut eaque, totam corporis laboriosam veritatis quis ad perspiciatis, totam corporis laboriosam veritatis, consectetur adipisicing elit quos non quis ad perspiciatis, totam corporis ea,
+                        </p>
+                    </div>*@
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="mailto:sales@email.com" class="btn btn-primary">Send us an email</a>
+                    @*<p class="m-t-sm">
+                            Or follow us on social platform
+                        </p>
+                        <ul class="list-inline social-icon">
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center m-t-lg m-b-lg">
+                    <p>
+                        <strong>&copy; @DateTime.Now.Year EventBx</strong> | <a href="/cookies">Cookie Policy</a> | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/Popper/popper.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/metisMenu/dist/jquery.metisMenu.js"></script>
+        <script src="~/lib/slimScroll/jquery.slimscroll.js"></script>
+        <script src="~/lib/pace/pace.js"></script>
+        <script src="~/lib/wow/wow.min.js"></script>
+        <script src="~/js/script.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/Popper/popper.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/metisMenu/dist/jquery.metisMenu.js"></script>
+        <script src="~/lib/pace/pace.min.js"></script>
+        <script src="~/lib/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="~/lib/wow/wow.min.js"></script>
+        <script src="~/js/script.min.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('body').scrollspy({
+                target: '.navbar-fixed-top',
+                offset: 80
+            });
+
+            // Page scrolling feature
+            $('a.page-scroll').bind('click', function (event) {
+                var link = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: $(link.attr('href')).offset().top - 50
+                }, 500);
+                event.preventDefault();
+                $('#navbar').collapse('hide');
+            });
+        });
+
+        var cbpAnimatedHeader = (function () {
+            var docElem = document.documentElement,
+                header = document.querySelector('.navbar-default'),
+                didScroll = false,
+                changeHeaderOn = 200;
+            function init() {
+                window.addEventListener('scroll', function (event) {
+                    if (!didScroll) {
+                        didScroll = true;
+                        setTimeout(scrollPage, 250);
+                    }
+                }, false);
+            }
+            function scrollPage() {
+                var sy = scrollY();
+                if (sy >= changeHeaderOn) {
+                    $(header).addClass('navbar-scroll')
+                }
+                else {
+                    $(header).removeClass('navbar-scroll')
+                }
+                didScroll = false;
+            }
+            function scrollY() {
+                return window.pageYOffset || docElem.scrollTop;
+            }
+            init();
+
+        })();
+
+        // Activate WOW.js plugin for animation on scrol
+        new WOW().init();
+
+    </script>
+    <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({ c: '46612996-0a6b-427a-96fc-5740338bf4bd', f: true }); done = true; } }; })();</script>
+</body>
+</html>

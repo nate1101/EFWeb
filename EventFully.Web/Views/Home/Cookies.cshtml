@@ -1,0 +1,242 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "EventBx";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Cookies</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/images/landing/favicon.ico">
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+    </environment>
+
+</head>
+
+<body id="page-top" class="landing-page">
+    <partial name="_CookieConsentPartial" />
+    <div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-expand-md" role="navigation">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="~/images/landing/logo.png" />
+                </a>
+                <div class="navbar-header page-scroll">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="nav-link page-scroll" href="/">Home</a></li>
+                        <li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <section class="generic">
+        <div class="container">
+            <h1>Cookie Policy</h1>
+            <h3>Effective: March 15, 2019</h3>
+
+            <p>A browser cookie is a small piece of data that is stored on your device to help websites and mobile apps remember things about you. Other technologies, including Web storage and identifiers associated with your device, may be used for similar purposes. In this policy, we say “cookies” to refer to all of these technologies.</p>
+
+            <p>Our Privacy Policy explains how we collect and use information from and about you when you use EventBx and certain other EventBx services. This policy explains more about how we use cookies and your related choices.</p>
+
+            <h3>How We Use Cookies</h3>
+            <p>Like most providers of online services, EventBx uses cookies, including third-party cookies, for a number of reasons, like protecting your data and account, helping us see which features are most popular, counting visitors to a page, improving our users’ experience, keeping our services secure, providing relevant advertising, and just generally providing you with a better, more intuitive, and satisfying experience. The cookies we use generally fall into one of the following categories.</p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Category of Cookies</th>
+                        <th>Why we use these cookies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Necessary</td>
+                        <td>We use these cookies to run our site, and to identify and prevent security risks. For example, we may use these cookies to store your session information to prevent others from changing your password without your username and password.</td>
+                    </tr>
+                    <tr>
+                        <td>Preferences</td>
+                        <td>
+                            We use these cookies to remember your settings and preferences, and to improve your experience on our site. For example, we may use these cookies to remember your language preferences.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Performance</td>
+                        <td>
+                            We use these cookies to collect information about how you use our site, monitor site performance, and improve our site performance, our services, and your experience. For example, we can use these cookies to learn more about which features are the most popular with our users and which ones might need some tweaks.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Your Choices</h3>
+            <p>Your browser may provide you with the option to refuse some or all browser cookies. You may also be able to remove cookies from your browser. For more information about how to manage browser cookies, please follow the instructions provided by your browser.</p>
+
+            <h3>Browser Cookies</h3>
+            <p>Your browser may provide you with the option to refuse some or all browser cookies. You may also be able to remove cookies from your browser. For more information about how to manage browser cookies, please follow the instructions provided by your browser.</p>
+
+            <h3>Mobile Device Identifiers</h3>
+            <p>
+                Your mobile operating system may let you opt-out from having certain device identifiers used for interest-based advertising. You should refer to the instructions provided by your mobile device’s manufacturer; this information is typically available under the “settings” function of your mobile device.
+                And of course, if your mobile device offers an uninstall process, you can always stop us from collecting information through the app by uninstalling
+                the EventBx app.
+            </p>
+        </div>
+    </section>
+    <section id="contact" class="gray-section contact">
+        <div class="container">
+            <div class="row m-b-lg">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Contact Us</h1>
+                    <p>Got questions? We have answers!</p>
+                </div>
+            </div>
+            <div class="row m-b-lg justify-content-center">
+                <div class="col-lg-6 col-lg-offset-3 text-center">
+
+                    <h1>
+                        <strong><span class="navy">EventBx</span></strong>
+                    </h1>
+                    @*795 Folsom Ave, Suite 600<br />
+                        San Francisco, CA 94107<br />*@
+                    (479) 444-4444<br />
+                    Support: support@eventbx.com<br />
+                    Sales: sales@eventbx.com
+
+
+                </div>
+                @*<div class="col-lg-4">
+                        <p class="text-color">
+                            Consectetur adipisicing elit. Aut eaque, totam corporis laboriosam veritatis quis ad perspiciatis, totam corporis laboriosam veritatis, consectetur adipisicing elit quos non quis ad perspiciatis, totam corporis ea,
+                        </p>
+                    </div>*@
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="mailto:test@email.com" class="btn btn-primary">Send us mail</a>
+                    @*<p class="m-t-sm">
+                            Or follow us on social platform
+                        </p>
+                        <ul class="list-inline social-icon">
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center m-t-lg m-b-lg">
+                    <p>
+                        <strong>&copy; @DateTime.Now.Year EventBx</strong> | <a href="/cookies">Cookie Policy</a> | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a>
+                    </p>                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/Popper/popper.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/metisMenu/dist/jquery.metisMenu.js"></script>
+        <script src="~/lib/slimScroll/jquery.slimscroll.js"></script>
+        <script src="~/lib/pace/pace.js"></script>
+        <script src="~/lib/wow/wow.min.js"></script>
+        <script src="~/js/script.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/Popper/popper.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/metisMenu/dist/jquery.metisMenu.js"></script>
+        <script src="~/lib/pace/pace.min.js"></script>
+        <script src="~/lib/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="~/lib/wow/wow.min.js"></script>
+        <script src="~/js/script.min.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('body').scrollspy({
+                target: '.navbar-fixed-top',
+                offset: 80
+            });
+
+            // Page scrolling feature
+            $('a.page-scroll').bind('click', function (event) {
+                var link = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: $(link.attr('href')).offset().top - 50
+                }, 500);
+                event.preventDefault();
+                $('#navbar').collapse('hide');
+            });
+        });
+
+        var cbpAnimatedHeader = (function () {
+            var docElem = document.documentElement,
+                header = document.querySelector('.navbar-default'),
+                didScroll = false,
+                changeHeaderOn = 200;
+            function init() {
+                window.addEventListener('scroll', function (event) {
+                    if (!didScroll) {
+                        didScroll = true;
+                        setTimeout(scrollPage, 250);
+                    }
+                }, false);
+            }
+            function scrollPage() {
+                var sy = scrollY();
+                if (sy >= changeHeaderOn) {
+                    $(header).addClass('navbar-scroll')
+                }
+                else {
+                    $(header).removeClass('navbar-scroll')
+                }
+                didScroll = false;
+            }
+            function scrollY() {
+                return window.pageYOffset || docElem.scrollTop;
+            }
+            init();
+
+        })();
+
+        // Activate WOW.js plugin for animation on scrol
+        new WOW().init();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EventFully.API</name>
+    </assembly>
+    <members>
+        <member name="T:EventFully.API.Extensions.SwaggerServiceExtensions">
+            <summary>
+            Configures the Swagger Service
+            </summary>
+        </member>
+        <member name="M:EventFully.API.Extensions.SwaggerServiceExtensions.AddSwaggerDocumentation(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the Swagger Docs
+            </summary>
+            <param name="services">Service Collection</param>
+        </member>
+        <member name="M:EventFully.API.Extensions.SwaggerServiceExtensions.UseSwaggerDocumentation(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            Extends the Swagger Middleware to use the correct, versioned endpoints
+            </summary>
+            <param name="app">The current application builder.</param>
+            <param name="provider">The API version descriptor provider used to enumerate defined API versions.</param>
+        </member>
+        <member name="T:EventFully.API.SwaggerDefaultValues">
+            <summary>
+            Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.
+            </summary>
+            <remarks>This <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter"/> is only required due to bugs in the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator"/>.
+            Once they are fixed and published, this class can be removed.</remarks>
+        </member>
+        <member name="M:EventFully.API.SwaggerDefaultValues.Apply(Swashbuckle.AspNetCore.Swagger.Operation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Applies the filter to the specified operation using the given context.
+            </summary>
+            <param name="operation">The operation to apply the filter to.</param>
+            <param name="context">The current operation filter context.</param>
+        </member>
+        <member name="T:EventFully.API.V1.Controllers.AgendaController">
+            <summary>
+            Represents a RESTful service of events.
+            </summary>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.AgendaController.#ctor(EventFully.Services.Interfaces.IAgendaService)">
+            <summary>
+            Event Controller
+            </summary>
+            <param name="agendaService"></param>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.AgendaController.GetAgendaItems(System.Int32)">
+            <summary>
+            Gets a list of agenda items.
+            </summary>
+            <returns>The requested agenda items.</returns>
+            <response code="200">The agenda items were successfully retrieved.</response>
+            <response code="404">The agenda items do not exist.</response>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.AgendaController.GetAgendaItem(System.Int32)">
+            <summary>
+            Gets an agenda items.
+            </summary>
+            <returns>The requested agenda item.</returns>
+            <response code="200">The agenda item was successfully retrieved.</response>
+            <response code="404">The agenda item does not exist.</response>
+        </member>
+        <member name="T:EventFully.API.V1.Controllers.AuthController">
+            <summary>
+            Represents a RESTful service of events.
+            </summary>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.AuthController.#ctor(Microsoft.Extensions.Options.IOptions{EventFully.Models.JWTSecurityToken})">
+            <summary>
+            Auth Controller
+            </summary>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.AuthController.GetToken">
+            <summary>
+            Gets a auth token.
+            </summary>
+            <returns>The requested token.</returns>
+            <response code="200">The token was successfully retrieved.</response>
+            <response code="404">The token does not exist.</response>
+        </member>
+        <member name="T:EventFully.API.V1.Controllers.EventsController">
+            <summary>
+            Represents a RESTful service of events.
+            </summary>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.EventsController.#ctor(EventFully.Services.Interfaces.IEventService)">
+            <summary>
+            Event Controller
+            </summary>
+            <param name="eventService"></param>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.EventsController.GetCurrentEvents">
+            <summary>
+            Gets a list of current and future events.
+            </summary>
+            <returns>The requested events.</returns>
+            <response code="200">The events were successfully retrieved.</response>
+            <response code="404">The events do not exist.</response>
+        </member>
+        <member name="M:EventFully.API.V1.Controllers.EventsController.GetEventById(System.Int32)">
+            <summary>
+            Gets event by id.
+            </summary>
+            <returns>The requested event.</returns>
+            <response code="200">The event was successfully retrieved.</response>
+            <response code="404">The event does not exist.</response>
+        </member>
+    </members>
+</doc>

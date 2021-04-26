@@ -1,0 +1,120 @@
+.fc table tr{
+    height: 50px;
+}
+
+.fc-event{
+    margin: 2px !important;
+}
+
+.fc-time{
+    margin-top: 5px;
+    font-size: 1em;
+}
+
+.fc-time-grid-event .fc-time {
+    font-size: 1em;
+}
+
+.fc-title{
+    margin-top: 5px;
+}
+
+.event-actions{
+    font-size: 1.5em;
+}
+
+.fc-day{
+    text-align: center;
+    color: #FFF;
+}
+
+.fc-row .fc-content-skeleton {
+    z-index: -1 !important;
+}
+
+.dropdown-colorselector{
+    padding: 5px !important;
+    /*background-color: #f5f5f5 !important;*/
+}
+
+.btn-colorselector {
+    border-radius: 10px !important;
+    border: solid 1px #c3c3c3;
+}
+
+.color-btn{
+    border-radius: 10px !important;
+    border: solid 1px #d3d3d3;
+}
+
+.primaryblue-bg,
+.bg-info {
+    background-color: #1c84c6 !important;
+    color: #ffffff;
+}
+
+.firstEventBox {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 100px 20px 20px 20px;
+}
+
+    .firstEventBox .ibox-content {
+        border: solid 2px #1ab394;
+        padding: 40px;
+    }
+
+.description-box{
+    height: 100px;
+}
+
+.navbar-top-links li a {
+    padding: 12px 10px 10px 10px;
+}
+
+.published-badge {
+    position: absolute;
+    top: 60px;
+    right: 25px;
+    width: 85px;
+    padding: 5px;
+    font-size: 12px;
+    border: solid 1px #FFF;
+}
+
+.paid-badge {
+    position: absolute;
+    top: 85px;
+    right: 25px;
+    width: 85px;
+    padding: 5px;
+    font-size: 12px;
+    border: solid 1px #FFF;
+}
+
+.initial-circle {
+    display: block;
+    height: 40px;
+    width: 40px;
+    background-color: #545454;
+    color: #1b859d;
+    text-align: center;
+    padding-top: 7px;
+    font-size: 15px;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: solid 2px #1b859d;
+}
+
+.management-module {
+    text-align: center;
+    padding: 30px 0;
+    background-color: #f8f8f9;
+    color: #bebec3;
+    font-weight: 600;
+}
+
+.slim-badge-preview{
+    width: 200px;
+    height: 200px;
+}

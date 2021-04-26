@@ -1,0 +1,93 @@
+﻿@model EventFully.Models.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - EventBx</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    </environment>
+
+
+
+</head>
+<body class="white-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row white-bg p-2">
+            <div class="col-md-12">
+                <img src="~/images/logo.png" class="img-responsive" style="max-height:85px;" />
+            </div>
+        </div>
+        <div class="row white-bg p-2">
+            <div class="col-md-6">
+                <h2 class="font-bold">Welcome to EventBx</h2>
+
+                <p>
+                    A simple platform to host your event or conference.
+                </p>
+
+                <p>
+                    Designed to make you and your attendees' event experience intuitive and informative. No more overwhelming setups with confusing features and high costs.
+                </p>
+                <p>
+                    Straightforward pricing plans and an easy-to-use platform will make your decision to go with EventBx a no-brainer.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <h1 class="font-bold">Sign In</h1>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <form class="m-t" role="form" method="post" asp-action="login" asp-controller="Account" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                        <div class="form-group">
+                            <input type="email" class="form-control" asp-for="Username" placeholder="Username" required="">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" asp-for="Password" placeholder="Password" required="">
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                        <a href="/Account/ForgotPassword">
+                            <small>Forgot password?</small>
+                        </a>
+
+                        <p class="text-muted text-center">
+                            <small>Do not have an account?</small>
+                        </p>
+                        <a class="btn btn-success btn-block" href="/Account/SignUp">Sign Up For Free</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <strong>&copy; @DateTime.Now.Year EventBx</strong> | <a href="https://www.eventbx.com/cookies" target="_blank">Cookie Policy</a> | <a href="https://www.eventbx.com/privacy" target="_blank">Privacy Policy</a> | <a href="https://www.eventbx.com/terms" target="_blank">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jQuery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+</body>
+
+</html>
